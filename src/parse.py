@@ -24,6 +24,8 @@ def add_options(*, parser):
     parser.add_argument(
         "--ignore",
         "-G",
+        nargs="*",
+        default=[],
         help="Glob pattern of src files to ignore",
     )
 

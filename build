@@ -1,2 +1,2 @@
 #!/bin/sh
-python src src
+python src src -G __tests__ __pycache__ *.pyc

@@ -76,7 +76,7 @@ def run(*, args):
     :param args: dict
     """
     src_path = args.path[0]
-    build_prep(path=src_path)
+    build_prep(path=src_path, ignore=args.ignore)
     if args.install:
         build_requirements(path=src_path)
 
