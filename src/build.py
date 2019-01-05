@@ -1,5 +1,8 @@
+"""
+Build functions
+"""
 from distutils.dir_util import copy_tree, remove_tree
-from subprocess import run
+from subprocess import call
 
 
 def _run_command(shell_command):
@@ -8,7 +11,7 @@ def _run_command(shell_command):
     :param shell_command: shell command string with all arguments
     :return: result of run
     """
-    return run(shell_command, shell=True)
+    return call(shell_command, shell=True)
 
 
 def _get_build_path(path):
@@ -55,3 +58,28 @@ def build_requirements(path):
         " -r '{}/requirements.txt'"
     ).format(build_path, path)
     _run_command(install_cmd)
+
+
+def build_compile(path):
+    """
+    Compile all python source files in build directory
+    :param path: src folder path
+    """
+    build_path = _get_build_path(path)
+    _run_command("python -m compileall {}".format(build_path))
+    _run_command("find {} -name '*.py' -type f -delete".format(build_path))
+
+
+def run(args):
+    """
+    Run build using arguments
+    :param args: dict
+    """
+    src_path = args.path[0]
+    build_prep(src_path)
+    if args.install:
+        build_requirements(src_path)
+
+    # zip folder
+    # write shebang
+    # add executable bit
