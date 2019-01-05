@@ -9,7 +9,7 @@ def main():
     """
     Run main code
     """
-    build.run(parse.args())
+    build.run(args=parse.args())
 
 
 main()

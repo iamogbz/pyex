@@ -1,11 +1,11 @@
 """
 Build functions
 """
-from distutils.dir_util import copy_tree, remove_tree
+from shutil import copytree, ignore_patterns, rmtree
 from subprocess import call
 
 
-def _run_command(shell_command):
+def _run(*, shell_command):
     """
     Run shell command
     :param shell_command: shell command string with all arguments
@@ -14,7 +14,7 @@ def _run_command(shell_command):
     return call(shell_command, shell=True)
 
 
-def _get_build_path(path):
+def _get_build_path(*, path):
     """
     Get path to build folder
     :param path: src folder path
@@ -23,62 +23,62 @@ def _get_build_path(path):
     return "{}.pyex".format(path)
 
 
-def build_clean(path):
+def build_clean(*, path):
     """
     Remove prepped build folder
     :param path: src folder path
     """
-    build_path = _get_build_path(path)
+    build_path = _get_build_path(path=path)
     try:
-        remove_tree(build_path)
+        rmtree(build_path)
     except FileNotFoundError:
         pass
 
 
-def build_prep(path):
+def build_prep(*, path, ignore=[]):
     """
     Prep build folder for zipping
     :param path: src folder path
     """
-    build_clean(path)
-    build_path = _get_build_path(path)
-    copy_tree(path, build_path)
+    build_clean(path=path)
+    build_path = _get_build_path(path=path)
+    copytree(path, build_path, ignore=ignore_patterns(*ignore))
 
 
-def build_requirements(path):
+def build_requirements(*, path):
     """
     Install requirements into build folder
     :param path: src folder path
     """
-    build_path = _get_build_path(path)
+    build_path = _get_build_path(path=path)
     install_cmd = (
         "pip install"
         " --install-option='--prefix={}'"
         " --ignore-installed"
         " -r '{}/requirements.txt'"
     ).format(build_path, path)
-    _run_command(install_cmd)
+    _run(shell_command=install_cmd)
 
 
-def build_compile(path):
+def build_compile(*, path):
     """
     Compile all python source files in build directory
     :param path: src folder path
     """
-    build_path = _get_build_path(path)
-    _run_command("python -m compileall {}".format(build_path))
-    _run_command("find {} -name '*.py' -type f -delete".format(build_path))
+    build_path = _get_build_path(path=path)
+    _run(shell_command="python -m compileall {}".format(build_path))
+    _run(shell_command="find {} -name '*.py' -type f -delete".format(build_path))
 
 
-def run(args):
+def run(*, args):
     """
     Run build using arguments
     :param args: dict
     """
     src_path = args.path[0]
-    build_prep(src_path)
+    build_prep(path=src_path)
     if args.install:
-        build_requirements(src_path)
+        build_requirements(path=src_path)
 
     # zip folder
     # write shebang

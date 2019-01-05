@@ -4,7 +4,7 @@ Argument parsing
 import argparse
 
 
-def add_options(parser):
+def add_options(*, parser):
     """
     Add parser options
     :param parser: ArgumentParser
@@ -21,6 +21,11 @@ def add_options(parser):
         action="store_true",
         help="Should install requirements.txt in folder",
     )
+    parser.add_argument(
+        "--ignore",
+        "-G",
+        help="Glob pattern of src files to ignore",
+    )
 
 
 def args():
@@ -29,5 +34,5 @@ def args():
     :return: dictionary of arguments
     """
     parser = argparse.ArgumentParser(description="Build python executable")
-    add_options(parser)
+    add_options(parser=parser)
     return parser.parse_args()
