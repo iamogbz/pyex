@@ -13,28 +13,28 @@ def add_options(*, parser):
         "path",
         type=str,
         nargs=1,
-        help="Path to the python script (folder with __main__.py entry point)",
+        help="path to the python script (folder with __main__.py entry point)",
     )
     parser.add_argument(
-        "--output",
         "-O",
+        "--output",
         type=str,
         nargs=1,
         required=True,
-        help="Output executable filename",
+        help="filename of built executable",
     )
     parser.add_argument(
-        "--install",
         "-I",
+        "--install",
         action="store_true",
-        help="Should install requirements.txt in folder",
+        help="install requirements.txt and include in executable",
     )
     parser.add_argument(
-        "--ignore",
         "-G",
+        "--ignore",
         nargs="*",
         default=[],
-        help="Glob pattern of src files to ignore",
+        help="glob pattern of src files to ignore",
     )
 
 
