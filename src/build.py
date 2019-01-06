@@ -70,6 +70,15 @@ def build_compile(*, path):
     _run(shell_command="find {} -name '*.py' -type f -delete".format(build_path))
 
 
+def build_zip(*, path):
+    """
+    Compress distributable into a zip file
+    :param path: src folder path
+    """
+    build_path = _get_build_path(path=path)
+    make_archive(base_name=build_path, format="zip", root_dir=build_path)
+
+
 def run(*, args):
     """
     Run build using arguments
@@ -80,6 +89,6 @@ def run(*, args):
     if args.install:
         build_requirements(path=src_path)
 
-    # zip folder
+    build_zip(path=src_path)
     # write shebang
     # add executable bit
