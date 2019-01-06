@@ -1,7 +1,7 @@
 """
 Build functions
 """
-from shutil import copytree, ignore_patterns, rmtree
+from shutil import copytree, ignore_patterns, make_archive, rmtree
 from subprocess import call
 
 
@@ -79,6 +79,22 @@ def build_zip(*, path):
     make_archive(base_name=build_path, format="zip", root_dir=build_path)
 
 
+def build_exec(*, src_path, dest_path):
+    """
+    Build executable from archive file
+    :param src_path: src folder path
+    :param dest_path: executable file
+    """
+    shebang = "#!/usr/bin/env python"
+    zip_file = "{}.zip".format(_get_build_path(path=src_path))
+    shell_cmd = (
+        "echo '{shebang}' > {exec} && "
+        "cat {archive} >> {exec} && "
+        "chmod +x {exec} && rm {archive}"
+    ).format(archive=zip_file, exec=dest_path, shebang=shebang)
+    _run(shell_command=shell_cmd)
+
+
 def run(*, args):
     """
     Run build using arguments
@@ -90,5 +106,5 @@ def run(*, args):
         build_requirements(path=src_path)
 
     build_zip(path=src_path)
-    # write shebang
-    # add executable bit
+    build_exec(src_path=src_path, dest_path=args.output[0])
+    build_clean(path=src_path)

@@ -12,4 +12,5 @@ def main():
     build.run(args=parse.args())
 
 
-main()
+if __name__ == "__main__":
+    main()

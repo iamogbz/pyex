@@ -16,6 +16,14 @@ def add_options(*, parser):
         help="Path to the python script (folder with __main__.py entry point)",
     )
     parser.add_argument(
+        "--output",
+        "-O",
+        type=str,
+        nargs=1,
+        required=True,
+        help="Output executable filename",
+    )
+    parser.add_argument(
         "--install",
         "-I",
         action="store_true",
