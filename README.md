@@ -17,7 +17,7 @@ git clone git@github.com:iamogbz/pyex.git
 Build `pyex` from src using pyex src into your `/usr/local/bin` directory
 
 ```sh
-./build
+make build
 ```
 
 ## Usage
