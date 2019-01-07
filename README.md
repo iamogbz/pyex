@@ -2,6 +2,24 @@
 
 Convert folder containing python source code to a single executable file
 
+## Requirements
+
+A version of [Python](https://www.python.org/downloads/) in your path, preferably Python 3
+
+## Install
+
+Clone repository
+
+```sh
+git clone git@github.com:iamogbz/pyex.git
+```
+
+Build `pyex` from src using pyex src into your `/usr/local/bin` directory
+
+```sh
+./build
+```
+
 ## Usage
 
 ```sh
