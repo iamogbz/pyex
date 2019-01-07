@@ -5,7 +5,7 @@ https://docs.python.org/3.7/library/argparse.html
 import argparse
 
 
-def add_options(*, parser):
+def add_options(parser):
     """
     Add parser options
     :param parser: ArgumentParser
