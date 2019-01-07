@@ -1,2 +1,2 @@
 #!/bin/sh
-python src src -O pyex -G "__tests__" "__pycache__" "*.pyc"
+python src src -O /usr/local/bin/pyex -G "__tests__" "__pycache__" "*.pyc"
