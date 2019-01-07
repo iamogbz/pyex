@@ -1,5 +1,6 @@
 """
 Argument parsing
+https://docs.python.org/3.7/library/argparse.html
 """
 import argparse
 
@@ -38,11 +39,19 @@ def add_options(*, parser):
     )
 
 
+def init():
+    """
+    Initialise parser
+    :return: ArgumentParser
+    """
+    parser = argparse.ArgumentParser(description="Build python executable")
+    add_options(parser=parser)
+    return parser
+
+
 def args():
     """
     Get arguments
     :return: dictionary of arguments
     """
-    parser = argparse.ArgumentParser(description="Build python executable")
-    add_options(parser=parser)
-    return parser.parse_args()
+    return init().parse_args()
