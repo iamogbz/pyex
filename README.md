@@ -40,11 +40,19 @@ optional arguments:
                         glob pattern of src files to ignore
 ```
 
+First check your code can be executed
+
 ```sh
-pyex /path/to/directory -O executable -G "__tests__" "__pycache__" "*.pyc"
+python /path/to/directory
+```
+
+If satisfied, build single executable file
+
+```sh
+pyex /path/to/directory -O /path/to/executable -G "__tests__" "__pycache__" "*.pyc"
 ```
 
 ## Caveats
 
-1. Requires a `__main__.py` file in the root directory being coverted
+1. Requires a `__main__.py` file in the directory being coverted
 2. Code in resulting executable is always compiled on first run
