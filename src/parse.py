@@ -52,6 +52,6 @@ def init():
 def args():
     """
     Get arguments
-    :return: dictionary of arguments
+    :return: parsed arguments object
     """
     return init().parse_args()
