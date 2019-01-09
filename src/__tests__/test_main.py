@@ -1,3 +1,3 @@
 """
-Test main entry
+Test module main
 """

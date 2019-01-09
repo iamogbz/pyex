@@ -3,7 +3,8 @@ Test parse module
 """
 import argparse
 import pytest
-from src import parse
+
+import parse
 
 
 class TestParse:
@@ -102,6 +103,6 @@ def test_calls_parse_args_on_init(monkeypatch):
     """
     mock_parsed_args = ["mockReturn", "argValues"]
     mock_arg_parser = argparse.ArgumentParser("Mock Argument Parser")
-    setattr(mock_arg_parser, "parse_args", lambda: mock_parsed_args)
+    monkeypatch.setattr(mock_arg_parser, "parse_args", lambda: mock_parsed_args)
     monkeypatch.setattr(parse, "init", lambda: mock_arg_parser)
     assert parse.args() == mock_parsed_args

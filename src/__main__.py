@@ -1,16 +1,8 @@
 """
-Pyex main entry
+Run pyex
 """
-import parse
-import build
-
-
-def main():
-    """
-    Run main code
-    """
-    build.run(args=parse.args())
+import entry
 
 
 if __name__ == "__main__":
-    main()
+    entry.main()

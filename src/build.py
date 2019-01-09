@@ -99,7 +99,7 @@ def build_exec(src_path, dest_path):
 def run(args):
     """
     Run build using arguments
-    :param args: dict
+    :param args: parsed arguments object
     """
     src_path = args.path[0]
     build_prep(path=src_path, ignore=args.ignore)
