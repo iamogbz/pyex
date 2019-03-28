@@ -1,2 +1,4 @@
 *.pyex
 .pytest_cache
+coverage.xml
+htmlcov

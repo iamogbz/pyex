@@ -5,6 +5,6 @@ python:
 install:
   - make install
 script:
-  - make tests
+  - make coverage
   - coverage xml
   - coveralls
