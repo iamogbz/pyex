@@ -18,6 +18,11 @@ tests:
 test-%:
 	@export PYTHONPATH=./src:$$PYTHONPATH && pytest -m $*
 
+.PHONY: coverage
+coverage:
+	@export PYTHONPATH=./src:$$PYTHONPATH && coverage run --source=. -m pytest
+	@coverage html
+
 .PHONY: build
 build:
 	@python src src -O /usr/local/bin/pyex -G "__tests__" "__pycache__" "*.pyc"

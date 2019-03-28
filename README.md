@@ -2,6 +2,9 @@
 
 Convert folder containing python source code to a single executable file
 
+[![Build Status](https://travis-ci.org/iamogbz/pyex.svg?branch=master)](https://travis-ci.org/iamogbz/pyex?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/iamogbz/pyex/badge.svg?branch=master)](https://coveralls.io/github/iamogbz/pyex?branch=master)
+
 ## Requirements
 
 A version of [Python](https://www.python.org/downloads/) in your path, preferably Python 3
