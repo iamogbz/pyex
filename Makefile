@@ -1,10 +1,16 @@
+ifndef DEST
+override DEST = "."
+endif
+
 .PHONY: help
 help:
-	@echo "make help		- show commands that can be run"
-	@echo "make install		- install project requirements"
-	@echo "make tests 		- run all tests"
-	@echo "make test-name 	- run only tests marked with 'name'"
-	@echo "make build 		- build pyex executable from src"
+	@echo "make help                         - show commands that can be run"
+	@echo "make install                      - install project requirements"
+	@echo "make test keyword='Parse'         - run only test match keyword"
+	@echo "make tests                        - run all tests"
+	@echo "make coverage                     - run all tests and collect coverage"
+	@echo "make build                        - build pyex executable from src"
+	@echo "DEST='/usr/local/bin' make build  - build pyex executable into folder"
 
 .PHONY: install
 install:
@@ -15,8 +21,8 @@ tests:
 	@export PYTHONPATH=./src:$$PYTHONPATH && pytest
 
 .PHONY: test
-test-%:
-	@export PYTHONPATH=./src:$$PYTHONPATH && pytest -m $*
+test:
+	@export PYTHONPATH=./src:$$PYTHONPATH && pytest -k $(keyword)
 
 .PHONY: coverage
 coverage:
@@ -25,4 +31,4 @@ coverage:
 
 .PHONY: build
 build:
-	@python src src -O /usr/local/bin/pyex -G "__tests__" "__pycache__" "*.pyc"
+	@python src src -O $(DEST)/pyex -G "__tests__" "__pycache__" "*.pyc"

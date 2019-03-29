@@ -20,7 +20,7 @@ git clone git@github.com:iamogbz/pyex.git
 Build `pyex` from src using pyex src into your `/usr/local/bin` directory
 
 ```sh
-make build
+DEST='/usr/local/bin' make build
 ```
 
 ## Usage
@@ -57,5 +57,5 @@ pyex /path/to/directory -O /path/to/executable -G "__tests__" "__pycache__" "*.p
 
 ## Caveats
 
-1. Requires a `__main__.py` file in the directory being coverted
-2. Code in resulting executable is always compiled on first run
+1. Requires a `__main__.py` file in the directory being coverted.
+2. Limited to nix enviroments. Checkout [pyinstaller](https://github.com/pyinstaller/pyinstaller) for usecases.
