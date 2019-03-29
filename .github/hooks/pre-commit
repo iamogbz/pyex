@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo "Update your '.github/hooks/pre-commit' script"

@@ -2,6 +2,18 @@ ifndef DEST
 override DEST = "."
 endif
 
+.PHONY: precommit
+precommit:
+	@ln -sf $(PWD)/.github/hooks/pre-commit .git/hooks/pre-commit
+	echo "precommit: hook successfully configured"
+
+.PHONY: upstream
+upstream:
+	@git remote add upstream https://github.com/iamogbz/oss-boilerplate
+	@git push origin master
+	@git push --all
+	echo "upstream: remote successfully configured"
+
 .PHONY: help
 help:
 	@echo "make help                         - show commands that can be run"
@@ -32,3 +44,7 @@ coverage:
 .PHONY: build
 build:
 	@python src src -O $(DEST)/pyex -G "__tests__" "__pycache__" "*.pyc"
+
+ifndef VERBOSE
+.SILENT:
+endif
