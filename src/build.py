@@ -3,7 +3,7 @@ Build functions
 https://docs.python.org/3.7/library/shutil.html
 """
 from shutil import copytree, ignore_patterns, make_archive, rmtree
-from subprocess import call
+import subprocess
 
 
 def _run(shell_command):
@@ -12,7 +12,7 @@ def _run(shell_command):
     :param shell_command: shell command string with all arguments
     :return: result of run
     """
-    return call(shell_command, shell=True)
+    return subprocess.check_output(shell_command, shell=True)
 
 
 def _get_build_path(path):
@@ -53,10 +53,7 @@ def build_requirements(path):
     """
     build_path = _get_build_path(path=path)
     install_cmd = (
-        "pip install"
-        " --install-option='--prefix={}'"
-        " --ignore-installed"
-        " -r '{}/requirements.txt'"
+        "pip install --target='{}' --upgrade -r '{}/requirements.txt'"
     ).format(build_path, path)
     _run(shell_command=install_cmd)
 
@@ -68,7 +65,7 @@ def build_compile(path):
     """
     build_path = _get_build_path(path=path)
     _run(shell_command="python -m compileall {}".format(build_path))
-    _run(shell_command="find {} -name '*.py' -type f -delete".format(build_path))
+    # _run(shell_command="find {} -name '*.py' -type f -delete".format(build_path))
 
 
 def build_zip(path):

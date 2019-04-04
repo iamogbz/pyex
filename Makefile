@@ -28,13 +28,24 @@ help:
 install:
 	@pip install -r requirements.txt
 
+.PHONY: test-prep
+test-prep:
+	@echo "[install]\nprefix=" > ~/.pydistutils.cfg
+
+.PHONY: test-clean
+test-clean:
+	@rm ~/.pydistutils.cfg
+
+
 .PHONY: tests
-tests:
+tests: test-prep
 	@export PYTHONPATH=./src:$$PYTHONPATH && pytest
+	$(MAKE) test-clean
 
 .PHONY: test
-test:
-	@export PYTHONPATH=./src:$$PYTHONPATH && pytest -k $(keyword)
+test: test-prep
+	@export PYTHONPATH=./src:$$PYTHONPATH && pytest -s -k $(keyword)
+	$(MAKE) test-clean
 
 .PHONY: coverage
 coverage:
