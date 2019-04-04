@@ -80,7 +80,7 @@ class TestBuild:
         build_clean(self.app_path)
         build_prep(self.app_path, [])
         build_compile(self.app_path)
-        assert glob(path.join(self.build_path, "**", "__main__*.pyc"))
+        assert glob(path.join(self.build_path, "**__main__*.pyc"))
 
     def test_build_run_creates_python_executable(self):
         """
