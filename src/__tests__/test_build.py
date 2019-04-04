@@ -8,10 +8,9 @@ import subprocess
 from build import (
     build_clean,
     build_compile,
-    build_exec,
     build_prep,
     build_requirements,
-    build_zip,
+    run,
 )
 
 
@@ -22,8 +21,15 @@ class TestBuild:
 
     app_path = './src/__tests__/mock_app'
     build_path = '{}.pyex'.format(app_path)
+    zip_path = '{}.zip'.format(build_path)
+    output_path = '{}.ex'.format(app_path)
     main_file = '__main__.py'
     ignore_file = 'mock.ignore'
+    args = lambda: None
+    setattr(args, 'path', [app_path])
+    setattr(args, 'ignore', [])
+    setattr(args, 'install', False)
+    setattr(args, 'output', [output_path])
 
     def test_build_clean_removes_build_path(self):
         """
@@ -76,20 +82,14 @@ class TestBuild:
         build_compile(self.app_path)
         assert glob(path.join(self.build_path, "**", "__main__*.pyc"))
 
-    def test_build_exec_creates_python_executable(self):
+    def test_build_run_creates_python_executable(self):
         """
-        Test build exec successfully creates runnable
+        Test build run successfully creates runnable
         """
-        pass
+        run(self.args)
 
     def test_run_installs_requirements_before_building(self):
         """
         Test run build installs requirements and builds exec
-        """
-        pass
-
-    def test_run_calls_build_methods_order(self):
-        """
-        Test run build execution order
         """
         pass
