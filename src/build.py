@@ -65,9 +65,9 @@ def build_compile(path):
     """
     build_path = _get_build_path(path=path)
     _run(shell_command="python -m compileall {}".format(build_path))
-    _run(
-        shell_command="find {} -name '*.py' -type f -delete".format(build_path)
-    )
+    # _run(
+    #     shell_command="find {} -name '*.py' -type f -delete".format(build_path)
+    # )
 
 
 def build_zip(path):

@@ -1,6 +1,7 @@
 """
 Test build module
 """
+from glob import glob
 from os import path
 import subprocess
 
@@ -70,7 +71,10 @@ class TestBuild:
         """
         Test that build compile command creates python executable
         """
-        pass
+        build_clean(self.app_path)
+        build_prep(self.app_path, [])
+        build_compile(self.app_path)
+        assert glob(path.join(self.build_path, "**", "__main__*.pyc"))
 
     def test_build_exec_creates_python_executable(self):
         """
