@@ -12,6 +12,7 @@ jobs:
   - name: build
     script: make build
   - stage: deploy
+    script: echo "Deploying to Github releases..."
     deploy:
       provider: releases
       api_key: $GH_TOKEN
