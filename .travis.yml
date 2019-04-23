@@ -4,16 +4,23 @@ python:
   - "3.7"
 install:
   - make install-ci
-script:
-  - make coverage
-  - coverage xml
-  - coveralls
-deploy:
-  provider: releases
-  api_key: $GH_TOKEN
-  file: "artifacts/build"
-  skip_cleanup: true
-  draft: true
-  on:
-    branch: master
-    # tags: true
+jobs:
+  include:
+  - stage: test and build
+  - name: test
+    script:
+      - make coverage
+      - coverage xml
+      - coveralls
+  - name: build
+    script: make build
+  - stage: deploy
+    deploy:
+      provider: releases
+      api_key: $GH_TOKEN
+      file: "./artifacts/build"
+      skip_cleanup: true
+      draft: true
+      on:
+        branch: master
+        # tags: true
