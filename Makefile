@@ -47,6 +47,7 @@ coverage:
 .PHONY: build
 build:
 	@echo "Nothing to do"
+	@mkdir ./artifacts && echo "Draft build" > ./artifacts/build
 
 ifndef VERBOSE
 .SILENT:
