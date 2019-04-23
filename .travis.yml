@@ -11,9 +11,8 @@ jobs:
       - coveralls
   - name: build
     script: make build
-    skip_cleanup: true
   - stage: deploy
-    script: echo "Deploying to Github releases..."
+    script: make build
     deploy:
       provider: releases
       api_key: $GH_TOKEN
