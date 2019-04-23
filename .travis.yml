@@ -7,3 +7,13 @@ script:
   - make coverage
   - coverage xml
   - coveralls
+  - make build
+deploy:
+  provider: releases
+  api_key: $GH_TOKEN
+  file: "./pyex"
+  skip_cleanup: true
+  # overwrite: true
+  on:
+    branch: master
+    tags: true
