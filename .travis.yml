@@ -2,10 +2,10 @@ language: python
 dist: xenial
 python:
   - "3.7"
-install:
-  - make install-ci
 jobs:
   include:
+  - stage: install
+    script: make install-ci
   - stage: test and build
   - name: test
     script:
