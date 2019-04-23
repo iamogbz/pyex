@@ -3,7 +3,7 @@ dist: xenial
 python:
   - "3.7"
 install:
-  - make install
+  - make install-ci
 script:
   - make coverage
   - coverage xml
