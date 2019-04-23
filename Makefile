@@ -1,4 +1,4 @@
-ENVARS := $(shell cat ".env" | xargs)
+ENVARS := $(shell cat ".env" 2>/dev/null | xargs)
 
 .PHONY: upstream
 upstream:

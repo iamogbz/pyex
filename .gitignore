@@ -2,3 +2,4 @@
 artifacts
 coverage.xml
 htmlcov
+venv
