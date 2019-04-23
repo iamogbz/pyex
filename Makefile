@@ -1,4 +1,5 @@
-ENVARS := $(shell cat ".env" 2>/dev/null | xargs)
+$(shell test -s ".env" || cp ".env.example" ".env")
+ENVARS := $(shell cat ".env" | xargs)
 
 .PHONY: upstream
 upstream:
