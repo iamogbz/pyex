@@ -21,4 +21,4 @@ jobs:
       draft: true
       on:
         branch: master
-        # tags: true
+        tags: true
