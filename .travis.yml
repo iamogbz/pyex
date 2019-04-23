@@ -11,6 +11,7 @@ jobs:
       - coveralls
   - name: build
     script: make build
+    skip_cleanup: true
   - stage: deploy
     script: echo "Deploying to Github releases..."
     deploy:
