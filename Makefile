@@ -7,6 +7,11 @@ upstream:
 	@git push --all
 	echo "upstream: remote successfully configured"
 
+.PHONY: newoss
+newoss:
+	@export REPO_NAME=$(name) && export REPO_URL=$(url) && ./.github/scripts/configure.sh
+	echo "project: new repo successfully configured"
+
 .PHONY: help
 help:
 	@echo "make help                         - show commands that can be run"
