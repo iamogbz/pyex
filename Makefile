@@ -1,3 +1,6 @@
+$(shell test -s ".env" || cp ".env.example" ".env")
+ENVARS := $(shell cat ".env" | xargs)
+
 ifndef DEST
 override DEST = "."
 endif
@@ -9,7 +12,7 @@ precommit:
 
 .PHONY: upstream
 upstream:
-	@git remote add upstream https://github.com/iamogbz/oss-boilerplate
+	@git remote add upstream https://github.com/iamogbz/py-boilerplate
 	@git push origin master
 	@git push --all
 	echo "upstream: remote successfully configured"
@@ -24,9 +27,15 @@ help:
 	@echo "make build                        - build pyex executable from src"
 	@echo "DEST='/usr/local/bin' make build  - build pyex executable into folder"
 
+.PHONY: venv
+venv:
+	test -d venv || python3 -m venv venv
+	touch venv/bin/activate
+
 .PHONY: install
-install:
-	@pip install -r requirements.txt
+install: venv
+	venv/bin/pip install --upgrade pip
+	venv/bin/pip install -Ur requirements.txt
 
 .PHONY: test-prep
 test-prep:
@@ -36,15 +45,14 @@ test-prep:
 test-clean:
 	@rm ~/.pydistutils.cfg
 
-
 .PHONY: tests
 tests: test-prep
-	@export PYTHONPATH=./src:$$PYTHONPATH && pytest
+	env ${ENVARS} pytest
 	$(MAKE) test-clean
 
 .PHONY: test
 test: test-prep
-	@export PYTHONPATH=./src:$$PYTHONPATH && pytest -s -k $(keyword)
+	env ${ENVARS} pytest -s -k $(keyword)
 	$(MAKE) test-clean
 
 .PHONY: coverage
