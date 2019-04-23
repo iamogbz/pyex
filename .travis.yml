@@ -1,7 +1,6 @@
 language: python
 dist: xenial
 python:
-  - "2.7"
   - "3.7"
 install:
   - make install
@@ -11,10 +10,10 @@ script:
   - coveralls
 deploy:
   provider: releases
-  api_key: "GITHUB OAUTH TOKEN"
+  api_key: $GH_TOKEN
   file: "artifacts/build"
   skip_cleanup: true
   draft: true
   on:
     branch: master
-    tags: true
+    # tags: true
