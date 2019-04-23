@@ -32,10 +32,6 @@ install: venv
 	venv/bin/pip install --upgrade pip
 	venv/bin/pip install -Ur requirements.txt
 
-.PHONY: install-ci
-install-ci:
-	pip install -Ur requirements.txt
-
 .PHONY: tests
 tests:
 	env ${ENVARS} pytest
