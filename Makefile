@@ -42,7 +42,7 @@ test:
 
 .PHONY: coverage
 coverage:
-	@export PYTHONPATH=./src:$$PYTHONPATH && coverage run --source=. -m pytest
+	@env ${ENVARS} coverage run --source=. -m pytest
 	@coverage html
 
 .PHONY: build
