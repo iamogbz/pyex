@@ -13,7 +13,7 @@ deploy:
   api_key: $GH_TOKEN
   file: "./pyex"
   skip_cleanup: true
-  # overwrite: true
   on:
     branch: master
+    python: "3.7"
     tags: true
